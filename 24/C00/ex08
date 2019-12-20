@@ -1,0 +1,77 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_print_combu.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pzhou <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/06 18:27:45 by pzhou             #+#    #+#             */
+/*   Updated: 2019/06/07 11:01:21 by pzhou            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <unistd.h>
+void ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+void ft_tt(int a, int b, char tab[])
+{
+	if(a == 1)
+	{
+		int z;
+
+		z = b;
+		while(z > 0)
+		{
+			z--;
+			ft_putchar(tab[z] + 48);
+		}
+	}
+	else
+	{
+		while(a > 1)
+		{
+			while(tab[a] < 10)
+			{
+				a--;
+				tab[a-1] = tab[a] + 1;
+				ft_tt(a, b, tab);
+				tab[a]++;
+			}
+		}
+	}
+}
+
+void ft_print_combn(int n)
+{
+	int cpt;
+
+	cpt = 0;
+	if(n==1)
+	{
+		while(cpt < 10)
+		{
+			ft_putchar(cpt + 48);
+			cpt++;
+		}
+	}
+	else
+	{
+		char tab[n];
+
+		while(cpt < n)
+		{
+			tab[cpt]=0;
+			cpt++;
+		}
+		ft_tt(n, n, tab);
+	}
+}
+
+int		main(void)
+{
+	ft_print_combn(2);
+	return (0);
+}
